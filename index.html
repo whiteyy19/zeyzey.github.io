@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Czyrhyll</title>
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"/>
+
+<style>
+:root {
+--pink1: #f8cdda;
+--pink2: #fbc8d4;
+--accent: #e09cac;
+--dark1: #0b0a0b;
+--dark2: #151214;
+--dark3: #1d1618;
+--wine: #a03a4b;
+--rose: #d97790;
+--soft-gray: #d0c6c8;
+}
+
+/* body kenemerut */
+body {
+cursor: url('azalea.png') 10 10, auto;
+margin: 0;
+font-family: 'Nunito', sans-serif;
+background: linear-gradient(135deg, var(--pink1), var(--pink2));
+color: #2d1a1e;
+transition: 0.6s ease;
+overflow-x: hidden;
+}
+
+body.dark {
+background: linear-gradient(135deg, var(--dark1), var(--dark2), var(--dark3));
+color: #dcd2d5;
+}
+
+/* cursor pointer hehe */
+button, a, .seal-icon {
+cursor: url('cs.png') 10 10, pointer;
+}
+
+/* header */
+header {
+text-align: center;
+padding: 2rem 0 1rem;
+font-family: 'Playfair Display', serif;
+font-size: 2.4rem;
+background: linear-gradient(135deg, rgba(255,240,245,0.9), rgba(255,182,193,0.4));
+color: #3a3a3a;
+transition: 0.5s;
+box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+body.dark header {
+background: linear-gradient(135deg, #120e10, #1c1416);
+color: var(--rose);
+}
+
+/* nav */
+nav {
+position: sticky;
+top: 0;
+z-index: 100;
+text-align: center;
+padding: 0.4rem;
+background: rgba(255,255,255,0.2);
+backdrop-filter: blur(8px);
+transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark nav {
+background: rgba(255,255,255,0.04);
+}
+
+nav.scrolled {
+box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+nav a {
+color: inherit;
+margin: 0 1.2rem;
+text-decoration: none;
+font-weight: 500;
+}
+
+nav a:hover { color: var(--accent); }
+
+body.dark nav a:hover {
+color: var(--rose);
+}
+
+
+/* wow section container */
+section {
+padding: 4rem 1rem;
+text-align: center;
+position: relative;
+}
+
+section h2 {
+font-family: 'Playfair Display', serif;
+font-size: 1.8rem;
+color: var(--accent);
+margin-bottom: 1rem;
+transition: all 0.4s ease;
+}
+
+h2:hover {
+  color: #ff4c82;
+  text-shadow: 0 0 8px #ffb6c1, 0 0 15px #ff4c82;
+  transform: scale(1.05);
+}
+body.dark h2 {
+  color: #ffb6c1;
+}
+body.dark h2:hover {
+  color: #ff80a8;
+  text-shadow: 0 0 10px #ff4c82, 0 0 25px #a13b5a;
+}
+
+body.dark section h2 {
+color: var(--wine);
+}
+
+/* section box */
+.section-box {
+background: rgba(247, 191, 207, 0.7);
+border-radius: 16px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+padding: 2.5rem 1.5rem;
+max-width: 900px;
+margin: 0 auto;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-box:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+body.dark .section-box {
+background: rgba(25, 18, 20, 0.9);
+box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+border: 1px solid rgba(80, 50, 60, 0.5);
+}
+
+/* dividerss woow */
+.divider {
+height: 80px;
+overflow: hidden;
+line-height: 0;
+}
+.divider svg {
+position: relative;
+display: block;
+width: calc(150% + 1.3px);
+height: 80px;
+}
+.divider path {
+fill: rgba(255,255,255,0.7);
+}
+
+body.dark .divider path {
+fill: rgba(255,255,255,0.05);
+}
+
+/* envelope section yayay */
+.love-note-section {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+min-height: 70vh;
+}
+
+.envelope {
+position: relative;
+width: 240px;
+height: 160px;
+background: linear-gradient(135deg, #f8cdda, #fbc8d4);
+border: 2px solid rgba(255,192,203,0.4);
+border-radius: 6px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+overflow: hidden;
+perspective: 1000px;
+}
+
+body.dark .envelope {
+background: linear-gradient(135deg, #241719, #1c1416);
+border-color: rgba(100, 60, 70, 0.4);
+}
+
+.envelope-flap {
+position: absolute;
+top: 0; left: 0;
+width: 100%; height: 50%;
+background: linear-gradient(135deg, #f7b6c8, #f4a2b7);
+clip-path: polygon(0 0, 50% 100%, 100% 0);
+transform-origin: top;
+transition: transform 0.7s ease;
+z-index: 3;
+}
+
+body.dark .envelope-flap {
+background: linear-gradient(135deg, #3b2024, #5a2d33);
+}
+
+.envelope.open .envelope-flap {
+transform: rotateX(180deg);
+}
+
+.seal-icon {
+position: absolute;
+bottom: 22px;
+left: 50%;
+transform: translateX(-50%);
+background: radial-gradient(circle at 30% 30%, #c84d5d, #8c1c2b 70%);
+border-radius: 50%;
+width: 60px; height: 60px;
+display: flex; justify-content: center; align-items: center;
+color: #fff0f5;
+font-size: 1.6rem;
+cursor: pointer;
+z-index: 2;
+transition: 0.3s;
+}
+
+body.dark .seal-icon {
+background: radial-gradient(circle at 30% 30%, #8c3241, #3a171e 70%);
+}
+
+/* letter popup yeeyay */
+.envelope-letter {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 50;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.envelope-letter.show {
+opacity: 1;
+visibility: visible;
+}
+
+.letter-content {
+  background: #fffdf9;
+  color: #2d1a1e;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.25);
+  width: 85%;
+  max-width: 700px;
+  font-family: "Dancing Script", cursive;
+  transform: scale(0.9);
+  animation: popUp 0.4s ease forwards;
+  position: relative;
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+body.dark .letter-content {
+background: #151213;
+color: #e4d2d7;
+border: 1px solid rgba(120,70,80,0.4);
+box-shadow: 0 3px 20px rgba(0,0,0,0.6);
+}
+
+.close-letter {
+position: absolute;
+top: 10px; right: 12px;
+background: none; border: none;
+font-size: 1.5rem;
+color: #c84d5d;
+cursor: pointer;
+}
+
+body.dark .close-letter {
+color: #a45a68;
+}
+
+@keyframes popUp {
+to { transform: scale(1); }
+}
+
+/* gallery of her <3 */
+.gallery-wrapper {
+  overflow-x: auto;
+  cursor: grab;
+  padding: 1rem 0;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 280px);
+  grid-template-rows: repeat(3, 200px);
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  filter: blur(4px) brightness(0.8);
+  transform: scale(1);
+  transition: transform 0.4s ease, filter 0.6s ease;
+}
+
+.gallery img:hover {
+  filter: blur(0) brightness(1);
+  transform: scale(1.05);
+}
+
+body.dark .gallery img {
+  filter: blur(4px) brightness(0.6);
+}
+body.dark .gallery img:hover {
+  filter: blur(0) brightness(0.9);
+  transform: scale(1.05);
+}
+
+/* music */
+.music-player {
+background: linear-gradient(135deg, #fbc8d4, #f8cdda);
+border-radius: 20px;
+padding: 1.8rem;
+width: 90%;
+max-width: 420px;
+margin: auto;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+color: #2d1a1e;
+position: relative;
+overflow: hidden;
+transition: all 0.4s ease;
+}
+
+body.dark .music-player {
+background: linear-gradient(145deg, #0e0a0b, #1c1416, #2a1a1f);
+color: var(--wine);
+box-shadow: 0 0 30px rgba(255, 182, 193, 0.08);
+border: 1px solid rgba(255, 182, 193, 0.05);
+}
+
+.song-info {
+font-family: 'Playfair Display', serif;
+font-size: 1.1rem;
+margin-bottom: 1rem;
+color: #a22750;
+text-shadow: 0 0 4px rgba(255,255,255,0.3);
+}
+
+body.dark .song-info {
+color: linear-gradient(90deg, #a13b5a, #661f32);
+text-shadow: 0 0 8px rgba(255, 145, 170, 0.2);
+}
+
+.controls {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 1rem;
+}
+
+.play-btn {
+background: radial-gradient(circle at 30% 30%, #ff8ab3, #ff4c82);
+color: white;
+border: none;
+border-radius: 50%;
+width: 60px;
+height: 60px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.4rem;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.play-btn:hover {
+transform: scale(1.1);
+box-shadow: 0 0 15px rgba(255, 130, 160, 0.8);
+}
+
+body.dark .play-btn {
+background: radial-gradient(circle at 30% 30%, #a13b5a, #661f32);
+box-shadow: 0 0 20px rgba(255, 130, 160, 0.15);
+}
+body.dark .play-btn:hover {
+box-shadow: 0 0 25px rgba(255, 150, 180, 0.3);
+}
+
+/* progress bar */
+.progress-container {
+display: flex;
+align-items: center;
+gap: 0.6rem;
+font-size: 0.8rem;
+color: inherit;
+}
+
+.progress-bar {
+flex-grow: 1;
+height: 6px;
+background: rgba(255, 255, 255, 0.5);
+border-radius: 5px;
+cursor: pointer;
+overflow: hidden;
+}
+
+body.dark .progress-bar {
+background: rgba(255, 255, 255, 0.08);
+}
+
+.progress {
+background: linear-gradient(90deg, #ff80a8, #ff4d94);
+height: 100%;
+width: 0;
+transition: width 0.2s linear;
+}
+
+body.dark .progress {
+background: linear-gradient(90deg, #a13b5a, #661f32);
+box-shadow: 0 0 8px rgba(255, 90, 140, 0.5);
+}
+
+/* playlist na hahah */
+.playlist {
+margin-top: 1.2rem;
+text-align: center;
+font-size: 0.95rem;
+}
+.song {
+padding: 0.5rem 0.8rem;
+cursor: pointer;
+border-radius: 8px;
+transition: background 0.3s, transform 0.3s;
+}
+.song:hover {
+background: rgba(255, 255, 255, 0.4);
+transform: translateX(4px);
+}
+body.dark .song:hover {
+background: rgba(255, 255, 255, 0.08);
+}
+.song.active {
+background: #ff4c82;
+color: #fff;
+box-shadow: 0 0 10px rgba(255, 120, 150, 0.8);
+}
+body.dark .song.active {
+background: linear-gradient(90deg, #a73256, #731b36);
+box-shadow: 0 0 12px rgba(255, 100, 140, 0.4);
+}
+
+
+/* messages */
+.message {
+background: rgba(255,255,255,0.6);
+margin: 1rem auto;
+max-width: 600px;
+padding: 1rem 1.5rem;
+border-radius: 12px;
+font-style: italic;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+body.dark .message {
+background: rgba(30, 20, 23, 0.9);
+color: #d5c1c6;
+border: 1px solid rgba(90, 50, 60, 0.3);
+}
+
+/* footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 192, 203, 0.4);
+  background: linear-gradient(180deg, rgba(255, 240, 245, 0.9), rgba(255, 228, 235, 0.8));
+  color: #a03a4b;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark footer {
+  background: linear-gradient(135deg, #120e10, #1c1416);
+  color: #ffb6c1;
+  border-top: 1px solid rgba(255, 150, 180, 0.3);
+}
+
+footer p {
+  transition: color 0.4s ease, text-shadow 0.4s ease, transform 0.4s ease;
+}
+
+footer p:hover {
+  color: #ff4c82;
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(255, 150, 180, 0.7);
+}
+
+body.dark footer p:hover {
+  color: #ff9bb6;
+  text-shadow: 0 0 15px rgba(255, 120, 160, 0.6);
+}
+
+
+/* theme toggle hehe */
+#theme-toggle {
+position: fixed;
+top: 15px;
+right: 20px;
+background: none;
+border: none;
+font-size: 1.6rem;
+cursor: pointer;
+color: #e06686;
+transition: transform 0.3s ease, color 0.4s ease;
+z-index: 1000;
+}
+
+#theme-toggle:hover {
+transform: scale(1.15);
+}
+
+body.dark #theme-toggle {
+color: #ff9bb6;
+}
+
+/* scroll barrrrr */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+::-webkit-scrollbar-track {
+background: #ffe4ec;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+background: linear-gradient(135deg, #f7b6c8, #f49ab5);
+border-radius: 10px;
+border: 2px solid #ffe4ec;
+transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(135deg, #f693ad, #f47d98);
+}
+
+
+body.dark::-webkit-scrollbar-track {
+background: #1a0f12;
+}
+
+body.dark::-webkit-scrollbar-thumb {
+background: linear-gradient(135deg, #3d0d1a, #651f32);
+border-radius: 10px;
+border: 2px solid #1a0f12;
+transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(135deg, #7e2a42, #b23a5e);
+box-shadow: 0 0 6px rgba(178, 58, 94, 0.5);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+/* float text animation for h2 yeeee */
+.float-text {
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* paragraph effects hehe */
+p {
+  transition: all 0.4s ease;
+}
+
+p:hover {
+  transform: scale(1.02);
+  color: #ff4c82;
+  text-shadow: 0 0 10px rgba(255, 150, 180, 0.7),
+               0 0 25px rgba(255, 130, 160, 0.4);
+}
+body.dark p:hover {
+  color: #ff9bb6;
+  text-shadow: 0 0 15px rgba(255, 100, 140, 0.6),
+               0 0 30px rgba(180, 60, 90, 0.3);
+}
+	
+.end {
+text-align: left;
+font-size: 1.5rem;
+	}
+	
+</style>
+</head>
+
+<body>
+<button id="theme-toggle"><i class="fas fa-heart"></i></button>
+
+<header>To The Love of My Life, Czyrhyll Corpuz</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#love-note">Love Letter</a>
+<a href="#gallery">Gallery</a>
+<a href="#music">Songs</a>
+<a href="#messages">Messages</a>
+<a href="#closing">Closing</a>
+</nav>
+
+<!-- Introduction yessss -->
+<section id="intro">
+<div class="section-box">
+<h2>♡ ‧₊˚ ⋅ ୨୧</h2>
+<p>A day never passed by without you crossing my mind. That really sums up how basically you've became a HUGE part of my life. But on deeper words.. not once have I ever thought of you worse. To me, you're like a sweet melody that never fades. Like a favorite song that I put on loop, playing over again and again.. And it aches, it physically aches missing you so deeply. It has always been you and I think it will always be you.
+	<br>
+	<br>I want to briefly take this moment to appreciate you. And I don't know how to start, honestly. I've never felt this way about anyone before. Remember that I told you that because of you I have shaped into a better person? That's right. Because of you, I became a person whom I never thought I'd be and I am truly contented. </p>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M321.39,56.24C192.5,30.48,96,0,0,0V100H1200V0C1076,0,950,58,780,75.27,600,93,480,81.5,321.39,56.24Z"></path></svg></div>
+
+<!-- Love Note hehe -->
+<section id="love-note" class="love-note-section">
+<div class="section-box">
+<h2>✧.* To You ᡣ𐭩</h2>
+<div class="envelope" id="envelope">
+<div class="envelope-flap"></div>
+<i class="seal-icon fas fa-heart" id="seal"></i>
+</div>
+</div>
+
+<!-- Letter popup -->
+<div class="envelope-letter" id="letter">
+<div class="letter-content">
+<button class="close-letter">&times;</button>
+<h2>My Beloved, Czy</h2>
+<p>Each and every heart beat is for you.
+	<br>	
+I don't know how to start at all, I have so much to tell you, a lot to express but I can't find the right words. So, if you're reading this, bear with me. I know I may not be the best person—heck I may not also be a great person. But what I am sure of—are my feelings. Alam mo po naman na hindi ko tinatago o dinedeny ano ang nararamdaman ko sa iyo. Why? Because I truly believe you are worth loving, you are lovable—I keep telling you that. I believe you're a miracle that's sent from the heaven. And I hope you are really for me.
+<br>
+<br>
+There's just something about you, you know? I'm really dazed by you, only you made me do stupid stuff like this—you make me stupidly romantic too much. I can't help, but put you in my mind. How can I not be taken in by you? Those hypnotizing, beautiful, brown eyes. Not only I fell in love because of how great of a person you are, I'm really fond of YOU—YOUR OWN SELF. It was only a matter of time before I had completely fallen in love by your sweet smile, I don't want want to hear anything else but your voice playing in my ears, your soothing voice, a captivating, soulful voice.. And there it was, you had completely stolen my heart, it belongs to you, it will always belong to you. How can I not love you? 
+	<br>
+</p>
+	
+<p class="end">My heart is yours, forever.
+	<br> — Riri
+	</p>
+</div>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0V100H1200V0C1000,90,800,60,600,50,400,40,200,20,0,0Z"></path></svg></div>
+
+<!-- Gallery of her <3 -->
+<section id="gallery">
+<div class="section-box">
+<h2 class="float-text">⋆˚࿔ Gallery of Her ₊˚⊹♡</h2>
+<p>Look at youuu, you're adorablee. (˶ᵔ ᵕ ᵔ˶)</p>
+<div class="gallery-wrapper">
+<div class="gallery">
+<img src="1.jpg" alt="asawako">
+<img src="2.jpg" alt="cute">
+<img src="3.jpg" alt="gorgeous girl">
+<img src="4.jpg" alt="ADORABLE">
+<img src="5.jpg" alt="MY BABYYY">
+<img src="6.jpg" alt="ugh, so pretty">
+<img src="7.jpg" alt="beautifullll">
+<img src="8.PNG" alt="kiss me">
+<img src="9.jpg" alt="my wife">
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0V100H1200V0C900,40,700,90,500,80,300,70,100,30,0,0Z"></path></svg></div>
+
+<!-- MUSICCCC -->
+<section id="music" class="music-section">
+<div class="section-box">
+<h2>𝄞⨾𓍢ִ໋ Playlist ♪ ༘⋆</h2>
+
+<div class="music-player">
+<audio id="audio"></audio>
+
+<div class="song-info">
+<span id="song-title">Select a song</span>
+</div>
+
+<div class="controls">
+<button id="play-pause" class="play-btn">
+<i class="fas fa-play"></i>
+</button>
+</div>
+
+<div class="progress-container">
+<span id="current-time">0:00</span>
+<div class="progress-bar" id="progress-bar">
+<div class="progress" id="progress"></div>
+</div>
+<span id="duration">0:00</span>
+</div>
+
+<div class="playlist">
+<div class="song" data-src="iris.mp3">Iris - The Goo Goo Dolls</div>
+<div class="song" data-src="btm.mp3">Back To Me - The Marías</div>
+<div class="song" data-src="beaches.mp3">Beaches - beabadoobee</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0V100H1200V0C1076,0,950,58,780,75.27,600,93,480,81.5,321.39,56.24Z"></path></svg></div>
+
+<!-- My unsaid letters to her -->
+<section id="messages">
+<div class="section-box">
+<h2>(˶˃ ᵕ ˂˶)</h2>
+<div class="message">"You're more than enough for me.. I won't ask for anything else but you."</div>
+<div class="message">"No matter what the obstacles, no matter what happens, I will always choose you—ready to drop and leave everything for you."</div>
+<div class="message">"You mean the world to me, I love you endlessly !"</div>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0V100H1200V0C900,40,700,90,500,80,300,70,100,30,0,0Z"></path></svg></div>
+
+<!-- closing na woohoo -->
+<section id="closing">
+<div class="section-box">
+<h2>｡⋆ৎ Forever Yours ୭⋆｡</h2>
+<p>Hi Zey-zey!
+	<br>I know I have said a lot of things about you and how I feel about you. And I don't think I'll ever get tired of reminding you how much you mean to me—how special you are to me. I mean.. think about it. No matter what happens, what will happen, and what happened, my heart always find its way back to you. My heart never forgets. You are always and the ONLY person that I am willing to give in to. And now, because of you—because I met you, my life became ideal again. In you—I found happiness, comfort, safety, and love.
+	<br>
+	<br>So.. I know you doubt yourself a lot, but I want to let you know that I am here. And I am here to always remind you how AMAZING of a person you are. I am your ally, your supporter, your lover. I will always appreciate you, I will always love you. <3 </p>
+</div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0V100H1200V0C900,40,700,90,500,80,300,70,100,30,0,0Z"></path></svg></div>
+	
+<footer>Made with love <3</footer>
+
+
+<script>
+
+// Theme Toggle light to dark
+const toggle = document.getElementById('theme-toggle');
+toggle.addEventListener('click', () => document.body.classList.toggle('dark'));
+
+// Envelope and letters yayay
+const seal = document.getElementById('seal');
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const closeBtn = document.querySelector('.close-letter');
+
+seal.addEventListener('click', () => {
+envelope.classList.add('open');
+setTimeout(() => letter.classList.add('show'), 600);
+});
+
+closeBtn.addEventListener('click', () => {
+letter.classList.remove('show');
+setTimeout(() => envelope.classList.remove('open'), 400);
+});
+
+// navbar kemerut
+window.addEventListener('scroll', () => {
+const nav = document.querySelector('nav');
+if (window.scrollY > 20) {
+nav.classList.add('scrolled');
+} else {
+nav.classList.remove('scrolled');
+}
+});
+
+
+// MUSIC YAYAY
+const audio = document.getElementById('audio');
+const playPauseBtn = document.getElementById('play-pause');
+const progressBar = document.getElementById('progress');
+const progressContainer = document.getElementById('progress-bar');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
+const songTitle = document.getElementById('song-title');
+const songs = document.querySelectorAll('.song');
+
+let currentSong = null;
+
+songs.forEach(song => {
+song.addEventListener('click', () => {
+const src = song.getAttribute('data-src');
+songTitle.textContent = song.textContent;
+audio.src = src;
+audio.play();
+playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+currentSong = song;
+});
+});
+
+playPauseBtn.addEventListener('click', () => {
+if (audio.paused && audio.src) {
+audio.play();
+playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+} else {
+audio.pause();
+playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+});
+
+audio.addEventListener('timeupdate', () => {
+const progressPercent = (audio.currentTime / audio.duration) * 100;
+progressBar.style.width = `${progressPercent}%`;
+
+const formatTime = time => {
+const mins = Math.floor(time / 60);
+const secs = Math.floor(time % 60).toString().padStart(2, '0');
+return `${mins}:${secs}`;
+};
+
+currentTimeEl.textContent = formatTime(audio.currentTime);
+durationEl.textContent = formatTime(audio.duration || 0);
+});
+
+progressContainer.addEventListener('click', (e) => {
+const width = progressContainer.clientWidth;
+const clickX = e.offsetX;
+const duration = audio.duration;
+audio.currentTime = (clickX / width) * duration;
+});
+
+
+</script>
+</body>
+</html>
